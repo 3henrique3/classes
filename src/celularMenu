@@ -1,8 +1,8 @@
 # Menu de celular
 
-def celularMenu():
-    c = Celular()
 
+def celularMenu():
+    
     while True:
         print("\n--- MENU ---")
         print("1 - Ligar celular")
@@ -14,29 +14,52 @@ def celularMenu():
         print("7 - Encerrar ligação")
         print("8 - Sair")
 
-        opcao = input("Escolha uma opção: ")
+        opcaoMenu = input("Escolha uma opção: ")
 
-        if opcao == "1":
-            c.ligar()
-            print("\nLigando celular.")
-        elif opcao == "2":
-            c.ativar_modo_aviao()
-        elif opcao == "3":
-            c.desativar_modo_aviao()
-        elif opcao == "4":
-            c.ativar_wifi()
-        elif opcao == "5":
-            c.desativar_wifi()
-        elif opcao == "6":
+        def ligar():
+            print("\nLigando celular")
+
+        def ativar_modoAviao():
+            print("\nAtivando modo avião.")
+
+        def desativar_modo_aviao():
+            print("\nDesativando modo avião.")
+
+        def ativar_wifi():
+            print("\nAtivando wifi")
+
+        def desativar_wifi():
+            print("\nDesativando wifi")
+
+        def desativar_wifi():
+            print("\nAtivando wifi")
+
+        def ligar_contato():
             contato = input("\nDigite o nome do contato: ")
-            c.ligar_contato(contato)
-        elif opcao == "7":
-            c.encerrar_ligacao()
-        elif opcao == "8":
+            print("\nLigando para", contato)
+
+        def encerrar_ligacao():
+            print("Chamada encerrada.")
+
+
+        if opcaoMenu == "1":
+            ligar()
+        elif opcaoMenu == "2":
+            ativar_modoAviao()
+        elif opcaoMenu == "3":
+            desativar_modo_aviao()
+        elif opcaoMenu == "4":
+            ativar_wifi()
+        elif opcaoMenu == "5":
+            desativar_wifi()
+        elif opcaoMenu == "6":
+            ligar_contato()
+        elif opcaoMenu == "7":
+            encerrar_ligacao()
+        elif opcaoMenu == "8":
             print("\nDesligando celular.")
             break
         else:
             print("Opção inválida")
-
 
 celularMenu()
