@@ -1,0 +1,42 @@
+# Menu de celular
+
+def celularMenu():
+    c = Celular()
+
+    while True:
+        print("\n--- MENU ---")
+        print("1 - Ligar celular")
+        print("2 - Ativar modo avião")
+        print("3 - Desativar modo avião")
+        print("4 - Ativar Wi-Fi")
+        print("5 - Desativar Wi-Fi")
+        print("6 - Fazer ligação")
+        print("7 - Encerrar ligação")
+        print("8 - Sair")
+
+        opcao = input("Escolha uma opção: ")
+
+        if opcao == "1":
+            c.ligar()
+            print("\nLigando celular.")
+        elif opcao == "2":
+            c.ativar_modo_aviao()
+        elif opcao == "3":
+            c.desativar_modo_aviao()
+        elif opcao == "4":
+            c.ativar_wifi()
+        elif opcao == "5":
+            c.desativar_wifi()
+        elif opcao == "6":
+            contato = input("\nDigite o nome do contato: ")
+            c.ligar_contato(contato)
+        elif opcao == "7":
+            c.encerrar_ligacao()
+        elif opcao == "8":
+            print("\nDesligando celular.")
+            break
+        else:
+            print("Opção inválida")
+
+
+celularMenu()
