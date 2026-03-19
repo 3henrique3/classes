@@ -1,0 +1,108 @@
+# Lanchonete
+
+total_vendas = 0
+total_itens = 0
+
+META = 200
+metaOriginal = 200
+
+HAMBURGUER = 18
+BATATA = 12
+REFRIGERANTE = 7
+SUCO = 9
+
+
+def registrarPedido():
+    print("\nRegistrar Pedido")
+
+    total_pedido = 0
+    quantidade_itens = 0
+
+    try:
+        pedido_hamburguer = int(input("Quantidade de Hambúrguer - Preço R$ 18,00: "))
+        pedido_batata = int(input("Quantidade de Batata - Preço R$ 12,00: "))
+        pedido_refrigerante = int(input("Quantidade de Refrigerante - Preço R$ 7,00: "))
+        pedido_suco = int(input("Quantidade de Suco - Preço R$ 9,00: "))
+    except:
+        print("Entrada inválida! Digite apenas números.")
+        return 0, 0
+
+    if (pedido_hamburguer < 0 or pedido_batata < 0 or pedido_refrigerante < 0 or pedido_suco < 0):
+        print("Escolha pelo menos um item para registrar um pedido.")
+        return 0, 0
+
+    total_pedido = (pedido_hamburguer * HAMBURGUER + pedido_batata * BATATA + pedido_refrigerante * REFRIGERANTE + pedido_suco * SUCO)
+
+    quantidade_itens = (
+        pedido_hamburguer + pedido_batata +
+        pedido_refrigerante + pedido_suco
+    )
+
+    desconto = 0
+
+    if total_pedido > 100:
+        desconto = total_pedido * 0.10
+        print("Desconto de 10% aplicado!")
+    elif quantidade_itens >= 5 and total_pedido >= 50:
+        desconto = total_pedido * 0.05
+        print("Desconto de 5% aplicado!")
+
+    total_final = total_pedido - desconto
+
+    print(f"Total do pedido: R$ {total_final}")
+
+    return total_final, quantidade_itens
+
+
+def ver_totalVendas():
+    print(f"\nTotal acumulado de vendas: R$ {total_vendas}")
+
+
+def ver_totalItens():
+    print(f"\nQuantidade total de itens vendidos: {total_itens}")
+
+
+def verMeta():
+    if total_vendas >= metaOriginal:
+        print(f"\nMeta de R$: {META} em vendas atingida.")
+    else:
+        restante = metaOriginal - total_vendas
+        print(f"\n A meta definida para hoje é {META}")
+        print(f"\n Faltam R$ {restante} para atingir a meta.")
+
+
+def lanchoneteMenu():
+    global total_vendas, total_itens
+
+    while True:
+        print("\n--- MENU ---")
+        print("1 - Registrar pedido")
+        print("2 - Ver total acumulado de vendas")
+        print("3 - Ver quantidade total de itens vendidos")
+        print("4 - Verificar meta de vendas")
+        print("5 - Encerrar sistema")
+
+        opcaoMenu = input("Escolha uma opção: ")
+
+        if opcaoMenu == "1":
+            valor, itens = registrarPedido()
+            total_vendas += valor
+            total_itens += itens
+
+        elif opcaoMenu == "2":
+            ver_totalVendas()
+
+        elif opcaoMenu == "3":
+            ver_totalItens()
+
+        elif opcaoMenu == "4":
+            verMeta()
+
+        elif opcaoMenu == "5":
+            print("\nSistema encerrado.")
+            break
+
+        else:
+            print("Opção inválida.")
+
+lanchoneteMenu()
