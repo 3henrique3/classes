@@ -32,10 +32,9 @@ def vender_produto(quantidade):
     print(f"Estoque atual: {estoque_produto}.")
 
 numero_vendas = int(input("Informe a quantidade de produtos vendidos: "))
-venda = vender_produto(numero_vendas)
-print(venda)
+vender_produto(numero_vendas)
 
-# Resposta: 
+# Resposta: A diferença é que, fora da função, a variável global pode ser alterada diretamente. Dentro da função, é necessário usar a palavra-chave global para indicar que a variável pertence ao escopo global; caso contrário, o Python considera a variável como local, impedindo a alteração do valor global.
     
 
 
