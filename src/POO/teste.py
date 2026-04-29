@@ -39,13 +39,18 @@ class Pessoa:
         return self.__idade
 
     @idade.setter
-    def idade(self, valor):
-        if valor <= 0:
+    def idade(self, cadastroIdade):
+        if cadastroIdade <= 0:
             raise ValueError("A idade deve ser maior que 0")
-        self.__idade = valor
+        
+        self.__idade = cadastroIdade
 
     def mostrarPessoa(self):
-        return f"Nome: {self.nome} | Idade: {self.idade}"
+        return (f"Seu nome é {self.nome} e a sua idade é {self.idade}")
 
-p1 = Pessoa("Ana", 25)
-p1.idade = -10
+pessoa1 = Pessoa(
+    nome = str(input("Informe o seu nome: ")),
+    idade = int(input("Informe a sua idade: "))
+)
+
+print(pessoa1.mostrarPessoa())
