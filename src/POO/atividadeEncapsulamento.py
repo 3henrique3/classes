@@ -5,9 +5,12 @@
 # 1. Explique o que é encapsulamento e qual o seu objetivo em POO
 
 """
-Encapsulamento é um dos pilares da Programação orientada que define as regras de como uma classe e seus objetos podem ser acessados,
-tem como principal objetivo controlar o acesso de classes e objetos, e quem pode acessá-los e modificá-los. 
+Resposta: Encapsulamento é um dos pilares da Programação orientada que define as regras de como uma classe e 
+seus objetos podem ser acessados, tem como principal objetivo controlar o acesso de classes e objetos, e quem 
+pode acessá-los e modificá-los. 
 """
+
+
 
 # 2. Crie classes que possui atributos públicos, protegidos e privados. 
 # Descreva a diferença entre esses três tipos de atributos e quando cada um deve ser utilizado.
@@ -82,10 +85,10 @@ class cadastroLead:
 class Pessoa:                
     def __init__(self, nome: str, idade: int):                
         self.nome = nome
-        self.__idade = idade
 
         if idade <= 0:
-            raise ValueError("A idade deve ser maior que 0")             
+            raise ValueError("A idade deve ser maior que 0")
+        self.__idade = idade            
                 
     def mostrarPessoa(self):                
         return (f"Seu nome é {self.nome} e a sua idade é {self.__idade}")      
@@ -98,19 +101,19 @@ pessoa1 = Pessoa(
 
 print(pessoa1.mostrarPessoa())
 
-# Resposta: A idade é um atributo privado, portanto só pode ser acessada na mesma classe em que foi criada.
-# Há uma verificação para o atributo idade impedindo que haja a instância do objeto da classe Pessoa se não estiver passado por
-# essa regra.
+# Resposta: A idade é um atributo privado, portanto só pode ser acessada através da classe em que foi criada.
+# Há uma validação para o atributo idade impedindo que haja a instância do objeto da classe Pessoa se não 
+# estiver passado por essa regra.
 
 
 
 # 9. Escolha um sistema e decida quais atributos devem ser públicos e quais devem ser protegidos ou privados.
 # Explique quais critérios você utilizaria para tomar essa decisão.
 
+# Resposta: 
 class Pessoa:
     def __init__(self, codigo: int, nome: str, idade: int):                
-        self.codigo = codigo # public para poder utilizar e acessar o codigo em todo o projeto, para 
-        self._nome = nome
-        self.__idade = idade
-
+        self.codigo = codigo # public para poder utilizar e acessar o codigo em todo o projeto, para buscar e identificar.
+        self._nome = nome # protected para sinalizar que o nome deve ser acessado somente nessa classe e suas subclasses, para uso interno.
+        self.__idade = idade # private para garantir que a idade seja acessada somente através de sua classe Pessoa.
 
