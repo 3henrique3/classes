@@ -60,9 +60,11 @@ class Reserva:
         print("Estadia atualizada: ", self._quantidade_dias, "dia(s).")
 
     def reduzir_dias(self, menos_dias):
-        if menos_dias > self._quantidade_dias and menos_dias == 0:
-            print("A quantidade deve ser menor ou igual a quantidade de dias já cadastrada e maior que zero.")
-            return
+        if menos_dias > self._quantidade_dias:
+            raise ValueError("A quantidade deve ser menor ou igual a quantidade de dias já cadastrada e maior que zero.")
+        
+        elif menos_dias <= 0:
+            raise ValueError("A quantidade de dias não pode ser menor ou igual a zero")
         
         self._quantidade_dias -= menos_dias
         print(f"Estadia atualizada: {self._quantidade_dias} dia(s).")
@@ -80,6 +82,9 @@ reserva1.mostrar_reserva()
 
 reserva1.nome_hospede = str(input("Informe o nome para a atualizar o seu cadastro: "))
 reserva1.quantidade_dias = 3
+reserva1.adicionar_dias(1)
+reserva1.reduzir_dias(2)
+reserva1.mostrar_reserva()
 
 
 reserva1.alterar_quarto(-1)
