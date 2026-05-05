@@ -68,47 +68,6 @@ class Reserva:
         print(f"Estadia atualizada: {self._quantidade_dias} dia(s).")
 
 
-    def alterar_dias(self):
-
-        def adicionar_dias(self, mais_dias):
-            if mais_dias <= 0:
-                print("Quantidade de dias inválidos.")
-                return
-        
-            self._quantidade_dias += mais_dias
-            print("Estadia atualizada: ", self._quantidade_dias, "dia(s).")
-
-
-        def reduzir_dias(self, menos_dias):
-            if menos_dias > self._quantidade_dias and menos_dias == 0:
-                print("A quantidade deve ser menor ou igual a quantidade de dias já cadastrada e maior que zero.")
-                return
-        
-            self._quantidade_dias -= menos_dias
-            print(f"Estadia atualizada: {self._quantidade_dias} dia(s).")
-
-
-        while True:
-            print("\nEstadia: ")
-            print("Digite 1 para adicionar dias.")
-            print("Digite 2 para reduzir dias.")
-            print("Digite 3 para cancelar a alteração.")
-
-            opcao = int(input("\nQual a opção desejada?"))
-
-            if opcao == 1:
-                adicionar_dias(mais_dias = int(input("informe quantos dias deseja adicionar.")))
-            
-            elif opcao == 2:
-                reduzir_dias(menos_dias = int(input("informe quantos dias deseja reduzir.")))
-
-            elif opcao == 3:
-                break
-
-            else:
-                print("Opção inválida.")
-
-
     def mostrar_reserva(self):
         print("\nDados da reserva: ")
         print(f"Hospede: {self._nome_hospede}")
@@ -127,9 +86,8 @@ reserva1.alterar_quarto(-1)
 reserva1.adicionar_dias(-2)
 reserva1.reduzir_dias(-3)
 # 10.
-# Resposta: O risco está na liberdade dada a toda parte do projeto em que qualquer desenvolvedor do projeto pode acessar e alterar esse saldo,
-# tornar esse atributo privado garante a integridade e a proteção do código, impedindo que esse atributo seja acessado diretamente fora da 
-# sua classe.
+# Resposta: O risco está na liberdade dada a toda parte do projeto em que qualquer desenvolvedor do projeto pode acessar e alterar esses atributos,
+# arriscando a integridade do código e dos dados.
     
 
     
