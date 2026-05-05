@@ -127,8 +127,9 @@ reserva1.alterar_quarto(-1)
 reserva1.adicionar_dias(-2)
 reserva1.reduzir_dias(-3)
 # 10.
-# Resposta: 
-
+# Resposta: O risco está na liberdade dada a toda parte do projeto em que qualquer desenvolvedor do projeto pode acessar e alterar esse saldo,
+# tornar esse atributo privado garante a integridade e a proteção do código, impedindo que esse atributo seja acessado diretamente fora da 
+# sua classe.
     
 
     
