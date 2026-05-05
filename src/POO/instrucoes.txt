@@ -1,0 +1,110 @@
+Instruções
+
+1. Explique qual a função do uso de __ antes dos atributos na classe Personagem.
+Resposta: Significa que o atributo é privado.
+
+2. Por que utilizamos métodos get e set ao invés de acessar os atributos diretamente?
+Resposta: São métodos mais seguros e práticos para acessar e alterar atributos privados e protegidos, sem precisar ir direto no atributo da 
+classe. Além disso, podemos definir formas de validação mais seguras antes desses novos valores serem atribuídos aos atributos da classe, 
+no caso dos métodos setters.
+
+3. O que acontece se tentarmos acessar personagem.__nome diretamente fora da classe?
+Resposta: Ocasiona um erro, porque o atributo privado só pode ser acessado dentro da classe em que foi declarado. 
+
+4. Qual a diferença entre variável local e variável global no contexto do sistema desenvolvido?
+Resposta: As variáveis declaradas dentro de uma função e de um bloco de código só existem dentro dessa função e bloco de código, já as variáveis
+criadas fora de uma função ou bloco de código podem ser acessadas em todo código, e para acessar uma variável de um escopo local fora desse
+escopo local, precisa declarar que a variável é global, global variável local.
+
+5. No menu principal, qual o papel do while? O que aconteceria se ele não existisse?
+Resposta: Criar um laço de repetição, sem esse while True no menu, o sistema não repetiria a ação de apresentar novamente o menu. 
+
+6. Crie um personagem chamado Darth Vader e adicione manualmente na lista.
+Resposta: personagens = []
+
+    while True:
+        print("\nCadastro de personagem da galáxia")
+
+        nome = input("Digite o nome do personagem: ")
+        planeta = input("Digite o planeta de origem: ")
+        lado_forca = input("Digite o lado da Força (Jedi, Sith ou Neutro): ")
+
+        try:
+            nivel_forca = int(input("Digite o nível da Força de 0 a 100: "))
+        except ValueError:
+            print("Valor inválido. O nível da Força será definido como 0.")
+            nivel_forca = 0
+
+        personagem = Personagem(nome, planeta, lado_forca, nivel_forca)
+        personagem1 = Personagem("Darth Vader", "Earth", "Sith", 80)
+        personagens.append(personagem1)
+        personagens.append(personagem)
+
+        continuar = input("Deseja cadastrar outro personagem? (s/n): ").lower()
+
+        if continuar != "s":
+            break
+
+    return personagens
+
+7. Modifique o método set_nivel_forca() para impedir valores inválidos.
+Resposta:
+def set_nivel_forca(self, nivel_forca):
+        """
+        Altera o nível da Força do personagem.
+
+        O nível precisa estar entre 0 e 100.
+        Aqui usamos condicionais para proteger o atributo privado.
+        """
+        if nivel_forca < 0 and nivel_forca > 100:
+            raise ValueError("Nível da Força inválido. Use um valor entre 0 e 100.")
+
+            self.__nivel_forca = nivel_forca
+        
+
+8. Adicione validação no método set_lado_forca().
+Resposta:
+def set_lado_forca(self, lado_forca):
+        """
+        Altera o lado da Força do personagem.
+
+        Apenas os valores Jedi, Sith ou Neutro são aceitos.
+        Aqui usamos condicionais para validar a informação.
+        """
+        lado_forca = lado_forca.capitalize()
+
+        if not lado_forca == "Jedi" or lado_forca == "Sith" or lado_forca == "Neutro":
+            raise ValueError("Lado da Força inválido. Use apenas Jedi, Sith ou Neutro.")
+
+            self.__lado_forca = lado_forca
+
+
+9. Trate entradas inválidas no cadastro.
+Resposta:
+
+
+10. Liste personagens do planeta Tatooine. 
+
+11. Exiba o personagem com maior nível da força. 
+
+12. Exiba o personagem com menor nível da força. 
+
+13. Exiba a média do nível da força. 
+
+14. Explique o uso de parâmetro na função contar_lados. 
+
+15. Crie a função personagens_fortes. 
+
+16. Crie a função buscar_personagem. 
+
+17. Explique escopo ao recriar lista dentro da função. 
+
+18. Remova personagem pelo nome. 
+
+19. Atualize o planeta de um personagem. 
+
+20. Conte personagens por planeta. 
+
+21. Gere relatório final. 
+
+22. Classifique personagens por nível (Mestre, Cavaleiro, Aprendiz). 

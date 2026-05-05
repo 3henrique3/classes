@@ -68,14 +68,16 @@ class ContaBancaria:
         
         return deposito
     
+    def sacar():
+        saque = float(input("Informe o valor do seu saque: "))
+         
+        if saque <= 0:
+            raise ValueError("O deposito deve ser maior que 0")
+        
+        else:
+            deposito -= saque
+
+        return deposito
+    
     
 conta1 = ContaBancaria.depositar()
-
-
-
-
-
-
-    
-        
-
