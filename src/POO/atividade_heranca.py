@@ -123,7 +123,7 @@ class Gerente(Funcionario):
         return self._departamento
 
     def liderar_equipe(self):
-        print(f"\nO(a) gerente está liderando a equipe de {self._departamento}")
+        print(f"\nO(a) gerente está liderando o departamento {self._departamento}")
     
 
 
@@ -135,6 +135,7 @@ gerente1 = Gerente(
 )
 
 gerente1.apresentar()
+gerente1.liderar_equipe()
 
 
 class Desenvolvedor(Funcionario):
@@ -159,6 +160,8 @@ class Desenvolvedor(Funcionario):
 # 11.
 gerente2 = Gerente("Henrique", 1000, 4.500, "Comercial")
 gerente2.apresentar()
+gerente2.liderar_equipe()
+
 
 desenvolvedor1 = Desenvolvedor("Henri", 20, 4000, "TypeScript")
 desenvolvedor1.mostrar_tecnologia()
