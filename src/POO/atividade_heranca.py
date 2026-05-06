@@ -52,7 +52,14 @@ Estudante: Pedro Henrique
 Atividade Herança
 """
 
-# 1; 2
+"""
+Estudante: Pedro Henrique
+
+05/05/2026
+Atividade Herança
+"""
+
+# 1; 2; 3; 4; 5; 6; 7; 8; 9:
 class Funcionario:
     def __init__(self, nome: str, idade: int, salario: float):
         self._nome = nome
@@ -83,6 +90,107 @@ class Funcionario:
             raise ValueError("O nome não pode estar vazio.")
         
         self._nome = cadastro_nome
-
+    
+    @idade.setter
+    def idade(self, cadastro_idade):
+        if not cadastro_idade:
+            raise ValueError("Idade inválida.")
         
+        if cadastro_idade <= 0:
+            raise ValueError("A idade não pode ser menor ou igual a zero.")
+        
+        self.__idade = cadastro_idade
+
+    @salario.setter
+    def salario(self, cadastro_salario):
+        if not cadastro_salario:
+            raise ValueError("Salário inválido.")
+        
+        if cadastro_salario <= 0:
+            raise ValueError("O salário deve ser maior que zero.")
+        
+        self.__salario = cadastro_salario
+
+
+class Gerente(Funcionario):
+    def __init__(self, nome, idade, salario, departamento):
+        super().__init__(nome, idade, salario)
+
+        self._departamento = departamento
+
+    @property
+    def departamento(self):
+        return self._departamento
+
+    def liderar_equipe(self):
+        print(f"\nO(a) gerente está liderando a equipe de {self._departamento}")
+    
+
+
+gerente1 = Gerente(
+    "Henrique",
+    100,
+    1000,
+    "Faturamento"
+)
+
+gerente1.apresentar()
+
+
+class Desenvolvedor(Funcionario):
+    def __init__(self, nome, idade, salario, linguagem_programacao):
+        super().__init__(nome, idade, salario)
+        
+        self._linguagem_programacao = linguagem_programacao
+    
+    @property
+    def linguagem_programacao(self):
+        return self._linguagem_programacao
+    
+    def mostrar_tecnologia(self):
+        print(f"\nO(a) desenvolvedor(a): {self.nome} de idade {self.idade}, tem salário {self.salario} e experiência: {self.linguagem_programacao}.")
+
+
+# 10.
+# Resposta: Uma das principais vantanges de utilizar a Herança no código, é poder reaproveitar os atributos e métodos de outra
+# classe e evitar redundância de código, tornando o código mais limpo.
+
+
+# 11.
+gerente2 = Gerente("Henrique", 1000, 4.500, "Comercial")
+gerente2.apresentar()
+
+desenvolvedor1 = Desenvolvedor("Henri", 20, 4000, "TypeScript")
+desenvolvedor1.mostrar_tecnologia()
+
+desenvolvedor2 = Desenvolvedor("Pedro", 30, 4000, "Java")
+desenvolvedor2.mostrar_tecnologia()
+
+
+# 12.
+# Resposta: O super().__init__ permite criar a classe filha com os atributos e métodos da classe pai, além de poder sobrescrever esses atributos e métodos
+# e criar novos atributos e métodos na classe filha.
+
+
+class Estagiario(Funcionario):
+    def __init__(self, nome, idade, salario, faculdade, curso):
+        super().__init__(nome, idade, salario)
+
+        self._faculdade = faculdade
+        self._curso = curso
+
+    @property
+    def faculdade(self):
+        return self._faculdade
+        
+    @property
+    def curso(self):
+        return self._curso
+
+    def estudar(self):
+        print(f"\nO(a) estagiário(a) estuda {self._curso} na instituição {self._faculdade}.")
+
+estagiario1 = Estagiario("Henrique", 111, 1000.40, "UFPE", "Análise e Desenvolvimento de sistemas")
+estagiario1.estudar()
+    
     
