@@ -63,6 +63,13 @@ class Conta_corrente(Conta):
     def saldo(self):
         return self.__saldo
     
+    @saldo.setter
+    def saldo(self, definir_saldo):
+        if definir_saldo < 0:
+            raise ValueError("O saldo da conta corrente não pode ser menor que zero.")
+        
+        self.__saldo = definir_saldo
+    
     def depositar(self, deposito: float):
         if deposito <= 0:
             raise ValueError("O deposito não pode ser menor ou igual a zero.")
@@ -80,12 +87,16 @@ class Conta_corrente(Conta):
         print(f"Saldo: {self.saldo}")
 
 
-conta1 = Conta_poupanca(1111, "Henrique", 10000)
+conta1 = Conta_poupanca(1111, "Henrique", 10000.10)
 conta1.sacar(100)
 
 conta2 = Conta_corrente(2222, "Henri")
 conta2.depositar(1999.99)
 conta2.sacar(200.50)
+
+
+# 2.
+
 
 
     
