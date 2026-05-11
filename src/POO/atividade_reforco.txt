@@ -1,23 +1,40 @@
-Instruções
+Atividade Reforço
+
+Estudante: Pedro Henrique
+05/05/2026
+
+Objetivo da atividade:
+Trabalhar os conceitos de:
+- Escopo
+- Loop
+- Condicionais
+- Classes
+- Orientação a Objetos com Encapsulamento
+
 
 1. Explique qual a função do uso de __ antes dos atributos na classe Personagem.
 Resposta: Significa que o atributo é privado.
+
 
 2. Por que utilizamos métodos get e set ao invés de acessar os atributos diretamente?
 Resposta: São métodos mais seguros e práticos para acessar e alterar atributos privados e protegidos, sem precisar ir direto no atributo da 
 classe. Além disso, podemos definir formas de validação mais seguras antes desses novos valores serem atribuídos aos atributos da classe, 
 no caso dos métodos setters.
 
+
 3. O que acontece se tentarmos acessar personagem.__nome diretamente fora da classe?
 Resposta: Ocasiona um erro, porque o atributo privado só pode ser acessado dentro da classe em que foi declarado. 
+
 
 4. Qual a diferença entre variável local e variável global no contexto do sistema desenvolvido?
 Resposta: As variáveis declaradas dentro de uma função e de um bloco de código só existem dentro dessa função e bloco de código, já as variáveis
 criadas fora de uma função ou bloco de código podem ser acessadas em todo código, e para acessar uma variável de um escopo local fora desse
 escopo local, precisa declarar que a variável é global, global variável local.
 
+
 5. No menu principal, qual o papel do while? O que aconteceria se ele não existisse?
 Resposta: Criar um laço de repetição, sem esse while True no menu, o sistema não repetiria a ação de apresentar novamente o menu. 
+
 
 6. Crie um personagem chamado Darth Vader e adicione manualmente na lista.
 Resposta: personagens = []
@@ -46,6 +63,7 @@ Resposta: personagens = []
             break
 
     return personagens
+
 
 7. Modifique o método set_nivel_forca() para impedir valores inválidos.
 Resposta:
@@ -80,18 +98,75 @@ def set_lado_forca(self, lado_forca):
 
 
 9. Trate entradas inválidas no cadastro.
+Resposta: O setter de lado_forca já possui um tratamento para verificar a entrada.
+        if nome.isAlpha():
+            self.__nome = nome
+
+        else:
+            raise ValueError("O nome deve ter apenas letras.")
+
+        if planeta.isAlpha():
+            self.__planeta = planeta
+
+        else:
+            raise ValueError("O nome do planeta deve ter apenas letras.")
+
+        if not nivel_forca:
+            raise ValueError("O nível da força não pode estar vazio.")
+        
+        self.__nivel_forca = nivel_forca
+
+
+10. Liste personagens do planeta Tatooine.
+Resposta: 
+elif opcao == "7":
+            planeta_busca = input("Digite o nome do planeta: ")
+            planeta_busca = planeta_busca.capitalize()
+
+            print(f"\nPersonagens do planeta {planeta_busca}:")
+            encontrou = False
+
+            for personagem in personagens:
+                if personagem.get_planeta() == planeta_busca:
+                    personagem.exibir_dados()
+                    encontrou = True
+
+            if encontrou == False:
+                print("Nenhum personagem encontrado para este planeta.")
+
+
+11. Exiba o personagem com maior nível da força.
 Resposta:
+elif opcao == "8":
+            personagem_maior_forca = max(personagens, key=lambda personagem_forte: personagem_forte.get_nivel_forca())
+            
+            print(f"\nPersonagem com o maior nível de força:")
+            personagem_maior_forca.exibir_dados()
 
 
-10. Liste personagens do planeta Tatooine. 
+12. Exiba o personagem com menor nível da força.
+Resposta:
+elif opcao == "9":
+            personagem_menor_forca = min(personagens, key=lambda personagem_fraco: personagem_fraco.get_nivel_forca())
+            
+            print(f"\nPersonagem com o menor nível de força:")
+            personagem_menor_forca.exibir_dados()
 
-11. Exiba o personagem com maior nível da força. 
 
-12. Exiba o personagem com menor nível da força. 
+13. Exiba a média do nível da força.
+Resposta:
+elif opcao == "10":
+            if len(personagens) > 0:
+                media_forca = sum(personagem.get_nivel_forca() for personagem in personagens) / len(personagens)
+                print(f"\nMédia do nível de força dos personagens: {media_forca}")
+            else:
+                print("Nenhum personagem encontrado para calcular a média.")
 
-13. Exiba a média do nível da força. 
 
-14. Explique o uso de parâmetro na função contar_lados. 
+14. Explique o uso de parâmetro na função contar_lados.
+Resposta: A função contar_lados recebe como parâmetro personagens que recebe a lista personagens para
+que a o laço for da função contar_lados possa percorrer.
+
 
 15. Crie a função personagens_fortes. 
 
