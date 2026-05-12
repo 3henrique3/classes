@@ -48,6 +48,7 @@ class Personagem:
         self.__planeta = planeta
         self.__lado_forca = "Neutro"
         self.__nivel_forca = 0
+        self.__classificacao = ""
 
         # Usamos os setters no construtor para validar os dados recebidos.
         self.set_lado_forca(lado_forca)
@@ -71,6 +72,12 @@ class Personagem:
             self.__nome = nome
         else:
             print("Nome inválido. O nome não pode ser vazio.")
+        
+        if nome.isAlpha():
+            self.__nome = nome
+
+        else:
+            raise ValueError("O nome deve ter apenas letras.")
 
     # =====================================================
     # GETTERS E SETTERS DO PLANETA
@@ -86,10 +93,13 @@ class Personagem:
         """
         Altera o planeta do personagem.
         """
-        if planeta.strip() != "":
+        if planeta.strip() != "" and planeta.isalpha():
             self.__planeta = planeta
+
         else:
-            print("Planeta inválido. O planeta não pode ser vazio.")
+            print("Planeta inválido. O planeta não pode ser vazio e deve conter somente letras.")
+
+        
 
     # =====================================================
     # GETTERS E SETTERS DO LADO DA FORÇA
@@ -133,10 +143,33 @@ class Personagem:
         O nível precisa estar entre 0 e 100.
         Aqui usamos condicionais para proteger o atributo privado.
         """
+
+        if nivel_forca < 0:
+            raise ValueError("O nível da força não pode ser menor que 0.")
+        
+        self.__nivel_forca = nivel_forca
+        
+
         if nivel_forca >= 0 and nivel_forca <= 100:
             self.__nivel_forca = nivel_forca
         else:
             print("Nível da Força inválido. Use um valor entre 0 e 100.")
+
+
+    # Getter classificação
+    def get_classificacao(self):
+        """
+        Retorna a classificação do personagem com base no nível da Força.
+        """
+
+        if self.__nivel_forca >= 0 and self.__nivel_forca <= 30:
+            self.__classificacao = "Aprendiz"
+        elif self.__nivel_forca > 30 and self.__nivel_forca <= 60:
+            self.__classificacao = "Cavaleiro"
+        elif self.__nivel_forca > 60 and self.__nivel_forca <= 100:
+            self.__classificacao = "Mestre"
+        
+        return self.__classificacao
 
     # =====================================================
     # MÉTODO PARA EXIBIR OS DADOS
@@ -151,6 +184,7 @@ class Personagem:
         print(f"Planeta: {self.__planeta}")
         print(f"Lado da Força: {self.__lado_forca}")
         print(f"Nível da Força: {self.__nivel_forca}")
+        print(f"Classificação: {self.get_classificacao()}")
         print("------------------------------------")
 
 
@@ -187,6 +221,89 @@ def contar_lados(personagens):
     print(f"Sith: {sith}")
     print(f"Neutros: {neutro}")
 
+def buscar_personagem_forte(personagens):
+    nivel_forca_busca = int(input("Digite o nível de força mínimo: "))
+
+    print(f"\nPersonagens com nível de força acima de {nivel_forca_busca}:")
+    encontrou = False
+
+    for personagem in personagens:
+        if personagem.get_nivel_forca() >= nivel_forca_busca:
+            personagem.exibir_dados()
+            encontrou = True
+
+        if not encontrou:
+            print(f"Nenhum personagem encontrado com nível de força maior que {nivel_forca_busca}.")
+
+def buscar_personagem(personagens):
+    busca_nome = str(input("Informe o nome do personagem que deseja buscar: "))
+
+    encontrou = False
+
+    for personagem in personagens:
+        if personagem.get_nome() == busca_nome:
+            print(f"\nPersonagem encontrado com o nome: {busca_nome}.")
+            personagem.exibir_dados()
+            encontrou = True
+
+        if not encontrou:
+            print(f"Nenhum personagem encontrado com o nome: {busca_nome}.")
+
+def remover_personagem(personagens):
+    remove_nome = str(input("Informe o nome do personagem que deseja remover: "))
+
+    encontrou = False
+
+    for personagem in personagens:
+        if personagem.get_nome() == remove_nome:
+            personagens.remove(personagem)
+            print(f"\nPersonagem removido com o nome: {remove_nome}.")
+            encontrou = True
+
+        if not encontrou:
+            print(f"Nenhum personagem encontrado com o nome: {remove_nome}.")
+
+def atualizar_planeta(personagens):
+    busca_nome = str(input("Informe o nome do personagem que deseja atualizar o planeta: "))
+
+    encontrou = False
+
+    for personagem in personagens:
+        if personagem.get_nome() == busca_nome:
+            atualizar_planeta = str(input("Informe o nome do planeta para atualizar: "))
+            personagem.set_planeta(atualizar_planeta)
+
+            print(f"\nPlaneta atualizado para {atualizar_planeta} do personagem: {busca_nome}.")
+            encontrou = True
+
+        if not encontrou:
+            print(f"Nenhum personagem encontrado com o nome: {busca_nome}.")
+
+def contar_personagens_planeta(personagens):
+    planetas = {}
+
+    for personagem in personagens:
+        planeta = personagem.get_planeta()
+        if planeta in planetas:
+            planetas[planeta] += 1
+        else:
+            planetas[planeta] = 1
+
+    print("\nResumo dos personagens por planeta:")
+    for planeta, quantidade in planetas.items():
+        print(f"{planeta}: {quantidade}")
+
+def gerar_relatorio_final(personagens):
+    print(f"\nRelatório final: ")
+    print(f"Total de personagens: {len(personagens)}")
+
+    for personagem in personagens:
+                personagem.exibir_dados()
+
+    contar_lados(personagens)
+
+    contar_personagens_planeta(personagens)
+
 
 # =========================================================
 # FUNÇÃO PARA CADASTRAR PERSONAGENS
@@ -216,9 +333,10 @@ def cadastrar_personagens():
             print("Valor inválido. O nível da Força será definido como 0.")
             nivel_forca = 0
 
-        personagem = Personagem(nome, planeta, lado_forca, nivel_forca)
         personagem1 = Personagem("Darth Vader", "Earth", "Sith", 80)
         personagens.append(personagem1)
+
+        personagem = Personagem(nome, planeta, lado_forca, nivel_forca)
         personagens.append(personagem)
 
         continuar = input("Deseja cadastrar outro personagem? (s/n): ").lower()
@@ -250,7 +368,17 @@ def menu(personagens):
         print("4 - Exibir personagens com nível da Força acima de 80")
         print("5 - Alterar nível da Força de um personagem")
         print("6 - Contar lados da Força")
-        print("7 - Sair")
+        print("7 - Exibir personagens de um planeta específico")
+        print("8 - Exibir o personagem com o maior nível de força")
+        print("9 - Exibir o personagem com o menor nível de força")
+        print("10 - Exibir a média do nível de força dos personagens")
+        print("11 - Buscar personagens fortes")
+        print("12 - Buscar personagem")
+        print("13 - Remover personagem pelo nome")
+        print("14 - Atualizar planeta de um personagem")
+        print("15 - Contar personagens por planeta")
+        print("16 - Gerar relatório final")
+        print("17 - Sair")
 
         opcao = input("Escolha uma opção: ")
 
@@ -318,6 +446,58 @@ def menu(personagens):
             contar_lados(personagens)
 
         elif opcao == "7":
+            planeta_busca = input("Digite o nome do planeta: ")
+            planeta_busca = planeta_busca.capitalize()
+
+            print(f"\nPersonagens do planeta {planeta_busca}:")
+            encontrou = False
+
+            for personagem in personagens:
+                if personagem.get_planeta() == planeta_busca:
+                    personagem.exibir_dados()
+                    encontrou = True
+
+            if encontrou == False:
+                print("Nenhum personagem encontrado para este planeta.")
+
+        elif opcao == "8":
+            personagem_maior_forca = max(personagens, key=lambda personagem_forte: personagem_forte.get_nivel_forca())
+            
+            print(f"\nPersonagem com o maior nível de força:")
+            personagem_maior_forca.exibir_dados()
+
+        elif opcao == "9":
+            personagem_menor_forca = min(personagens, key=lambda personagem_fraco: personagem_fraco.get_nivel_forca())
+
+            print(f"\nPersonagem com o menor nível de força:")
+            personagem_menor_forca.exibir_dados()
+
+        elif opcao == "10":
+            if len(personagens) > 0:
+                media_forca = sum(personagem.get_nivel_forca() for personagem in personagens) / len(personagens)
+                print(f"\nMédia do nível de força dos personagens: {media_forca}")
+            else:
+                print("Nenhum personagem encontrado para calcular a média.")
+
+        elif opcao == "11":
+            buscar_personagem_forte(personagens)
+
+        elif opcao == "12":
+            buscar_personagem(personagens)
+
+        elif opcao == "13":
+            remover_personagem(personagens)
+
+        elif opcao == "14":
+            atualizar_planeta(personagens)
+
+        elif opcao == "15":
+            contar_personagens_planeta(personagens)
+
+        elif opcao == "16":
+            gerar_relatorio_final(personagens)
+
+        elif opcao == "17":
             print("Sistema encerrado. Que a Força esteja com você!")
             break
 
