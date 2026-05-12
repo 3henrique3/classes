@@ -105,14 +105,16 @@ Resposta: O setter de lado_forca já possui um tratamento para verificar a entra
         else:
             raise ValueError("O nome deve ter apenas letras.")
 
-        if planeta.isAlpha():
+
+        if planeta.strip() != "" and planeta.isalpha():
             self.__planeta = planeta
 
         else:
-            raise ValueError("O nome do planeta deve ter apenas letras.")
+            print("Planeta inválido. O planeta não pode ser vazio e deve conter somente letras.")
 
-        if not nivel_forca:
-            raise ValueError("O nível da força não pode estar vazio.")
+
+        if nivel_forca < 0:
+            raise ValueError("O nível da força não pode ser menor que 0.")
         
         self.__nivel_forca = nivel_forca
 
@@ -168,18 +170,125 @@ Resposta: A função contar_lados recebe como parâmetro personagens que recebe 
 que a o laço for da função contar_lados possa percorrer.
 
 
-15. Crie a função personagens_fortes. 
+15. Crie a função personagens_fortes.
+Resposta: 
+def buscar_personagem_forte(personagens):
+    nivel_forca_busca = int(input("Digite o nível de força mínimo: "))
 
-16. Crie a função buscar_personagem. 
+    print(f"\nPersonagens com nível de força acima de {nivel_forca_busca}:")
+    encontrou = False
 
-17. Explique escopo ao recriar lista dentro da função. 
+    for personagem in personagens:
+        if personagem.get_nivel_forca() >= nivel_forca_busca:
+            personagem.exibir_dados()
+            encontrou = True
+
+        if not encontrou:
+            print(f"Nenhum personagem encontrado com nível de força maior que {nivel_forca_busca}.")
+
+16. Crie a função buscar_personagem.
+Resposta:
+def buscar_personagem(personagens):
+    busca_nome = str(input("Informe o nome do personagem que deseja buscar: "))
+
+    encontrou = False
+
+    for personagem in personagens:
+        if personagem.get_nome() == busca_nome:
+            print(f"\nPersonagem encontrado com o nome: {busca_nome}.")
+            personagem.exibir_dados()
+            encontrou = True
+
+        if not encontrou:
+            print(f"Nenhum personagem encontrado com o nome: {busca_nome}.")
+
+17. Explique escopo ao recriar lista dentro da função.
+Resposta: Na função cadastrar_personagens, a lista personagesns só existe dentro da função e no final desse bloco há o return personagens,
+que faz com que os dados dessa lista no escopo local seja exportada para lista do escopo global lista_personagens na linha lista_personagens = cadastrar_personagens(),
+nesse caso lista_personagens recebe o return lista personagens da função cadastrar_personagens.
 
 18. Remova personagem pelo nome. 
+Resposta:
+def remover_personagem(personagens):
+    remove_nome = str(input("Informe o nome do personagem que deseja remover: "))
+
+    encontrou = False
+
+    for personagem in personagens:
+        if personagem.get_nome() == remove_nome:
+            personagens.remove(personagem)
+            print(f"\nPersonagem removido com o nome: {remove_nome}.")
+            encontrou = True
+
+        if not encontrou:
+            print(f"Nenhum personagem encontrado com o nome: {remove_nome}.")
 
 19. Atualize o planeta de um personagem. 
+Resposta:
+def atualizar_planeta(personagens):
+    busca_nome = str(input("Informe o nome do personagem que deseja atualizar o planeta: "))
 
-20. Conte personagens por planeta. 
+    encontrou = False
 
-21. Gere relatório final. 
+    for personagem in personagens:
+        if personagem.get_nome() == busca_nome:
+            atualizar_planeta = str(input("Informe o nome do planeta para atualizar: "))
+            personagem.set_planeta(atualizar_planeta)
 
-22. Classifique personagens por nível (Mestre, Cavaleiro, Aprendiz). 
+            print(f"\nPlaneta atualizado para {atualizar_planeta} do personagem: {busca_nome}.")
+            encontrou = True
+
+        if not encontrou:
+            print(f"Nenhum personagem encontrado com o nome: {busca_nome}.")
+
+20. Conte personagens por planeta.
+Resposta:
+def contar_persnagens_planeta(personagens):
+    planetas = {}
+
+    for personagem in personagens:
+        planeta = personagem.get_planeta()
+        if planeta in planetas:
+            planetas[planeta] += 1
+        else:
+            planetas[planeta] = 1
+
+    print("\nResumo dos personagens por planeta:")
+    for planeta, quantidade in planetas.items():
+        print(f"{planeta}: {quantidade}")
+
+21. Gere relatório final.
+Resposta:
+def gerar_relatorio_final(personagens):
+    print(f"\nRelatório final: ")
+    print(f"Total de personagens: {len(personagens)}")
+
+    for personagem in personagens:
+                personagem.exibir_dados()
+
+    contar_lados(personagens)
+
+    contar_personagens_planeta(personagens)
+
+22. Classifique personagens por nível (Mestre, Cavaleiro, Aprendiz).
+Resposta:
+self.__nome = nome
+        self.__planeta = planeta
+        self.__lado_forca = "Neutro"
+        self.__nivel_forca = 0
+        self.__classificacao = ""
+
+def get_classificacao(self):
+        """
+        Retorna a classificação do personagem com base no nível da Força.
+        """
+
+        if self.__nivel_forca >= 0 and self.__nivel_forca <= 30:
+            self.__classificacao = "Aprendiz"
+        elif self.__nivel_forca > 30 and self.__nivel_forca <= 60:
+            self.__classificacao = "Cavaleiro"
+        elif self.__nivel_forca > 60 and self.__nivel_forca <= 100:
+            self.__classificacao = "Mestre"
+        
+        return self.__classificacao
+
