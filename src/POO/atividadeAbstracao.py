@@ -1,5 +1,6 @@
 """
 Estudante: Pedro Henrique
+11/05/2026
 
 Atividade ABSTRAÇÃO
 
@@ -42,6 +43,7 @@ Uma empresa de automação residencial desenvolve um sistema capaz de controlar 
 
 Com base nesse contexto, explique como a abstração poderia ser utilizada para representar esses dispositivos dentro da aplicação. 
 """
+
 
 """
 1. Resposta: A abstração pode ser implementada nesse caso para que as classes filmes, séries e documentários sigam o padrão do streamimg que
@@ -93,7 +95,6 @@ class Documentario(Streaming):
         print("Exibindo informação do documentário.")
 
 
-
 """
 2. Resposta: A organização será a partir de uma classe pai que definirá acessos gerais, enquanto as subclasses criadas a partir dessa classe pai terão os mesmos acessos gerais,
 porém cada uma com suas especificidades.
@@ -115,23 +116,133 @@ class Recepcao(Funcionario):
     def registrar_informacao_paciente(self):
         print("Acesso Recepção")
 
+
 """
-3. Resposta: A organização pode ser através de uma classe abstrata Transporte com o método abstrato entrega, as classes filhas da super classe Transporte herdariam o
-método entrega, e a partir de cada subclasse seria definido formas diferentes de definir o método entrega.
+3. Resposta: A organização pode ser através de uma classe abstrata Transporte com o método abstrato entrega, as classes filhas da super classe Transporte herdariam os seus
+métodos, e a partir de cada subclasse seria definido formas diferentes de executar os métodos.
 """
 class Transporte(ABC):
     @abstractmethod
-    def entrega(self):
+    def iniciar_rota(self):
+        pass
+
+    @abstractmethod
+    def entregar_pedido(self):
+        pass
+
+    @abstractmethod
+    def finalizar_entrega(self):
         pass
 
 class Moto(Transporte):
-    def entrega(self):
-        print("Moto iniciando rota")
-        print("Entrega")
+    def iniciar_rota(self):
+        print("Rota iniciada na moto.")
 
+    def entregar_pedido(self):
+        print("Pedido entregue pelo motociclista.")
+
+    def finalizar_entrega(self):
+        print("Entrega finalizada na moto.")
+
+class Bicicleta(Transporte):
+    def iniciar_rota(self):
+        print("Rota iniciada na bicicleta.")
+
+    def entregar_pedido(self):
+        print("Pedido entregue pelo ciclista.")
+
+    def finalizar_entrega(self):
+        print("Entrega finalizada na bicicleta.")
+
+class Carro(Transporte):
+    def iniciar_rota(self):
+        print("Rota iniciada no carro.")
+
+    def entregar_pedido(self):
+        print("Pedido entregue pelo motorista.")
+
+    def finalizar_entrega(self):
+        print("Entrega finalizada no carro.")
 
 
 """
 4. Resposta: A abstração nesse caso se daria a partir da definição de uma classe abstrata ConteudoEducacional com os métodos abstratos video_aulas, quizzes e materialPDF
 cada subclasse criada a partir da classe Conteudo
 """
+class ConteudoEducacional(ABC):
+    @abstractmethod
+    def liberar_acesso(self):
+        pass
+
+    @abstractmethod
+    def registrar_progresso(self):
+        pass
+
+    @abstractmethod
+    def validar_conclusao(self):
+        pass
+
+class VideoAula(ConteudoEducacional):
+    def liberar_acesso(self):
+        print("Acesso à vídeo-aula liberado.")
+
+    def registrar_progresso(self):
+        print("Progresso da vídeo-aula registrado.")
+
+    def validar_conclusao(self):
+        print("Conclusão da vídeo-aula validada.")
+
+class Quiz(ConteudoEducacional):
+    def liberar_acesso(self):
+        print("Acesso ao quiz liberado.")
+
+    def registrar_progresso(self):
+        print("Progresso do quiz registrado.")
+
+    def validar_conclusao(self):
+        print("Conclusão do quiz validada.")
+
+class MaterialPDF(ConteudoEducacional):
+    def liberar_acesso(self):
+        print("Acesso ao material em PDF liberado.")
+
+    def registrar_progresso(self):
+        print("Progresso do material em PDF registrado.")
+
+    def validar_conclusao(self):
+        print("Conclusão do material em PDF validada.")
+
+
+"""
+5. Resposta: A abstração nesse caso se daria a partir da definição de uma classe abstrata DispositivoInteligente com os métodos abstratos 
+e cada subclasse criada a partir da classe DispositivoInteligente  herdaria os métodos abstratos de definindo suas especificações.
+"""
+class DispositivoInteligente(ABC):
+    @abstractmethod
+    def conectar_sistema(self):
+        pass
+
+    @abstractmethod
+    def responder_comando(self):
+        pass
+
+class Lampada(DispositivoInteligente):
+    def conectar_sistema(self):
+        print("Lâmpada conectada ao sistema.")
+
+    def responder_comando(self):
+        print("Lâmpada respondendo ao comando.")
+
+class Camera(DispositivoInteligente):
+    def conectar_sistema(self):
+        print("Câmera conectada ao sistema.")
+
+    def responder_comando(self):
+        print("Câmera respondendo ao comando.")
+
+class ArCondicionado(DispositivoInteligente):
+    def conectar_sistema(self):
+        print("Ar-condicionado conectado ao sistema.")
+
+    def responder_comando(self):
+        print("Ar-condicionado respondendo ao comando.")
